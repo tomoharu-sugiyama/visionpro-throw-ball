@@ -10,7 +10,11 @@ struct ImmersiveView: View {
     var body: some View {
         RealityView { content in
             content.add(model.setupContentEntity())
+            //減速のフレームのやつ
         }
+//        update: { context in
+//            model.updateBallVelocityPerFrame()
+//        }
         .task {
             do {
                 if model.dataProvidersAreSupported && model.isReadyToRun {
@@ -38,8 +42,10 @@ struct ImmersiveView: View {
                 model.initBall()
             }
         }
+        
         .onChange(of: model.errorState) {
             openWindow(id: "error")
         }
+        
     }
 }
